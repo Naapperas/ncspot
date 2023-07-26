@@ -551,6 +551,16 @@ impl<I: ListItem + Clone> ViewExt for ListView<I> {
 
                 return Ok(CommandResult::Consumed(None));
             }
+            Command::Sort(key, direction) => {                
+                
+                let mut content = self.content.write().unwrap();
+
+                (*content).sort_by(|a, b| {
+                    Ordering::Greater
+                });
+
+                return Ok(CommandResult::Consumed(Option::Some("Test".into())))
+            }
             #[cfg(feature = "share_clipboard")]
             Command::Share(mode) => {
                 let url = match mode {
